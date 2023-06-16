@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import "./styling/App.css"
 import InputField from "./components/InputField";
+import { Task } from "./model";
 
 const App: React.FC = () => {
-    const [todo, setTodo] = useState<string>("");
+    const [id, setId] = useState<number>(1);
+    const [taskInput, setTaskInput] = useState<string>("");
+    const [tasks, setTasks] = useState<Task[]>([]);
+
+    const addTask = (event: React.FormEvent) => {
+        event.preventDefault();
+        if (taskInput) {
+            setTasks([...tasks, {
+                id,
+                task: taskInput,
+                isDone: false 
+            }]);
+            setId(id + 1);
+            setTaskInput("");
+        };
+    };
 
     return (
         <div className="App">
             <span className="heading">Taskager</span>
             <InputField
-                todo={todo}
-                setTodo={setTodo}
+                addTask={addTask}
+                taskInput={taskInput}
+                setTaskInput={setTaskInput}
             />
         </div>
     );

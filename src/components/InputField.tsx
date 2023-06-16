@@ -2,18 +2,19 @@ import React from 'react'
 import "../styling/InputField.css"
 
 interface Props {
-    todo: string,
-    setTodo: React.Dispatch<React.SetStateAction<string>>;
+    addTask: (event: React.FormEvent) => void;
+    taskInput: string,
+    setTaskInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputField: React.FC<Props> = ({ todo, setTodo }) => {
+const InputField: React.FC<Props> = ({ addTask, taskInput, setTaskInput }) => {
     return (
-        <form className="input">
+        <form className="input" onSubmit={addTask}>
             <input
                 className="input-box"
                 placeholder="Enter a Task"
-                value={todo}
-                onChange={(event) => setTodo(event.target.value)}
+                value={taskInput}
+                onChange={(event) => setTaskInput(event.target.value)}
             />
             <button className="input-submit" type="submit">
                 Go
