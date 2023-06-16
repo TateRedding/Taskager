@@ -1,10 +1,10 @@
 import React from "react";
 import "../styling/App.css"
 
-const App = () => {
+const App: React.FC = () => {
     return (
-        <div>
-            <h3>Hello World!</h3>
+        <div className="App">
+            <span className="heading">Taskager</span>
         </div>
     );
 };
