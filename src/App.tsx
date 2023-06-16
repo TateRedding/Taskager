@@ -2,6 +2,7 @@ import React, { useEffect, useId, useState } from "react";
 import "./styling/App.css"
 import InputField from "./components/InputField";
 import { Task } from "./model";
+import TaskList from "./components/TaskList";
 
 const App: React.FC = () => {
     const [id, setId] = useState<number>(1);
@@ -14,7 +15,7 @@ const App: React.FC = () => {
             setTasks([...tasks, {
                 id,
                 task: taskInput,
-                isDone: false 
+                isDone: false
             }]);
             setId(id + 1);
             setTaskInput("");
@@ -28,6 +29,10 @@ const App: React.FC = () => {
                 addTask={addTask}
                 taskInput={taskInput}
                 setTaskInput={setTaskInput}
+            />
+            <TaskList
+                tasks={tasks}
+                setTasks={setTasks}
             />
         </div>
     );

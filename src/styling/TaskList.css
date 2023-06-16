@@ -1,0 +1,12 @@
+.tasks {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+    .tasks {
+        width: 95%;
+    }
+}

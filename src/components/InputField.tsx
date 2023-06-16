@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
-import "../styling/InputField.css"
+import React, { useRef } from "react";
+import "../styling/InputField.css";
 
 interface Props {
     addTask: (event: React.FormEvent) => void;
-    taskInput: string,
+    taskInput: string;
     setTaskInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
