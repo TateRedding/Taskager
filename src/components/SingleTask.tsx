@@ -1,42 +1,32 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styling/SingleTask.css"
-import { Task } from "../model";
+import { Actions, Task } from "../model";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 
 interface Props {
     task: Task;
     tasks: Task[];
-    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+    dispatch: React.Dispatch<Actions>;
 }
 
-const SingleTask: React.FC<Props> = ({ task, tasks, setTasks }) => {
+const SingleTask: React.FC<Props> = ({ task, tasks, dispatch }) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTaskInput, setEditTaskInput] = useState<string>(task.task);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
     const completeTask = (id: number) => {
-        setTasks(tasks.map(task => {
-            return task.id === id ?
-                { ...task, isDone: !task.isDone }
-                :
-                task
-        }));
+        dispatch({ type: "complete", payload: id });
     };
 
     const deleteTask = (id: number) => {
-        setTasks(tasks.filter(task => task.id !== id));
+        dispatch({ type: "remove", payload: id });
     };
 
     const editTask = (event: React.FormEvent, id: number) => {
         event.preventDefault();
-        setTasks(tasks.map(task => {
-            return task.id === id ?
-                { ...task, task: editTaskInput }
-                :
-                task
-        }));
+        dispatch({ type: "edit", payload: { id, task: editTaskInput } });
         setEdit(false);
     };
 

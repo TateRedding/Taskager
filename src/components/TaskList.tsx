@@ -1,14 +1,14 @@
 import React from "react";
 import "../styling/TaskList.css";
-import { Task } from "../model";
+import { Actions, Task } from "../model";
 import SingleTask from "./SingleTask";
 
 interface Props {
     tasks: Task[];
-    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+    dispatch: React.Dispatch<Actions>;
 };
 
-const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
+const TaskList: React.FC<Props> = ({ tasks, dispatch }) => {
     return (
         <div className="tasks">
             {
@@ -16,7 +16,7 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
                     <SingleTask
                         task={task}
                         tasks={tasks}
-                        setTasks={setTasks}
+                        dispatch={dispatch}
                         key={task.id}
                     />
                 ))
