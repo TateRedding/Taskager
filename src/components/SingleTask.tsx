@@ -6,11 +6,10 @@ import { MdDone } from "react-icons/md";
 
 interface Props {
     task: Task;
-    tasks: Task[];
     dispatch: React.Dispatch<Actions>;
 }
 
-const SingleTask: React.FC<Props> = ({ task, tasks, dispatch }) => {
+const SingleTask: React.FC<Props> = ({ task, dispatch }) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTaskInput, setEditTaskInput] = useState<string>(task.task);
 

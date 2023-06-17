@@ -10,17 +10,31 @@ interface Props {
 
 const TaskList: React.FC<Props> = ({ tasks, dispatch }) => {
     return (
-        <div className="tasks">
-            {
-                tasks.map(task => (
-                    <SingleTask
-                        task={task}
-                        tasks={tasks}
-                        dispatch={dispatch}
-                        key={task.id}
-                    />
-                ))
-            }
+        <div className="tasks-container">
+            <div className="tasks">
+                <span className="tasks-heading">Active Tasks</span>
+                {
+                    tasks.map(task => {
+                        return <SingleTask
+                            task={task}
+                            dispatch={dispatch}
+                            key={task.id}
+                        />
+                    })
+                }
+            </div>
+            <div className="tasks completed">
+            <span className="tasks-heading">Completed Tasks</span>
+                {
+                    tasks.map(task => {
+                        return <SingleTask
+                            task={task}
+                            dispatch={dispatch}
+                            key={task.id}
+                        />
+                    })
+                }
+            </div>
         </div>
     );
 };

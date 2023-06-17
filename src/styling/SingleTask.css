@@ -1,10 +1,15 @@
 .single-task {
     display: flex;
-    width: 29.5%;
     border-radius: 5px;
     padding: 20px;
     margin-top: 15px;
-    background-color: #FFFF99
+    background-color: #FFFF99;
+    transition: 0.2s
+}
+
+.single-task:hover {
+    box-shadow: 0 0 5px black;
+    transform: scale(1.03);
 }
 
 .single-task-text {
@@ -22,16 +27,4 @@
     margin-left: 10px;
     font-size: 25px;
     cursor: pointer;
-}
-
-@media (max-width: 1200px) {
-    .single-task {
-        width: 40%
-    }
-}
-
-@media (max-width: 900px) {
-    .single-task {
-        width: 100%;
-    }
 }

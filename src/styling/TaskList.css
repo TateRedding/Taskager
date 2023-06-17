@@ -1,12 +1,37 @@
-.tasks {
+.tasks-container {
     display: flex;
-    justify-content: space-evenly;
     width: 90%;
-    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-@media (max-width: 900px) {
+.tasks {
+    display: flex;
+    flex-direction: column;
+    width: 47.5%;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #32C3CD;
+}
+
+.completed {
+    background-color: #FF6750;
+}
+
+.tasks-heading {
+    font-size: 30px;
+    color: white;
+}
+
+@media (max-width: 700px) {
     .tasks {
-        width: 95%;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .tasks-container {
+        width: 90%;
+        flex-direction: column;
     }
 }
