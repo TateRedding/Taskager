@@ -1,42 +1,71 @@
 import React from "react";
 import "../styling/TaskList.css";
-import { Actions, Task } from "../model";
+import { Task } from "../model";
 import SingleTask from "./SingleTask";
+import { StrictModeDroppable } from "../StrictModeDroppable";
 
 interface Props {
     tasks: Task[];
-    dispatch: React.Dispatch<Actions>;
+    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+    completedTasks: Task[];
+    setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
-const TaskList: React.FC<Props> = ({ tasks, dispatch }) => {
+const TaskList: React.FC<Props> = ({ tasks, setTasks, completedTasks, setCompletedTasks }) => {
     return (
         <div className="tasks-container">
-            <div className="tasks">
-                <span className="tasks-heading">Active Tasks</span>
+            <StrictModeDroppable droppableId="TaskList">
                 {
-                    tasks.map(task => {
-                        return <SingleTask
-                            task={task}
-                            dispatch={dispatch}
-                            key={task.id}
-                        />
-                    })
+                    (provided, snapshot) => (
+                        <div
+                            className={`tasks ${snapshot.isDraggingOver ? "drag-active" : null}`}
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <span className="tasks-heading">Active Tasks</span>
+                            {
+                                tasks.map((task, index) => {
+                                    return <SingleTask
+                                        task={task}
+                                        index={index}
+                                        tasks={tasks}
+                                        setTasks={setTasks}
+                                        key={task.id}
+                                    />
+                                })
+                            }
+                            {provided.placeholder}
+                        </div>
+                    )
                 }
-            </div>
-            <div className="tasks completed">
-            <span className="tasks-heading">Completed Tasks</span>
+            </StrictModeDroppable>
+            <StrictModeDroppable droppableId="CompletedTaskList">
                 {
-                    tasks.map(task => {
-                        return <SingleTask
-                            task={task}
-                            dispatch={dispatch}
-                            key={task.id}
-                        />
-                    })
+                    (provided, snapshot) => (
+                        <div
+                            className={`tasks completed ${snapshot.isDraggingOver ? "drag-complete" : null}`}
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <span className="tasks-heading">Completed Tasks</span>
+                            {
+                                completedTasks.map((task, index) => {
+                                    return <SingleTask
+                                        task={task}
+                                        index={index}
+                                        tasks={completedTasks}
+                                        setTasks={setCompletedTasks}
+                                        key={task.id}
+                                    />
+                                })
+                            }
+                            {provided.placeholder}
+                        </div>
+                    )
                 }
-            </div>
+            </StrictModeDroppable>
         </div>
     );
 };
 
-export default TaskList
+export default TaskList;

@@ -15,8 +15,16 @@
     background-color: #32C3CD;
 }
 
+.drag-active {
+    background-color: #00E7EC;
+}
+
 .completed {
     background-color: #FF6750;
+}
+
+.drag-complete {
+    background-color: #FF2600;
 }
 
 .tasks-heading {
